@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // SUMMARY
       if (step === steps.length - 2) {
         document.getElementById("summary").innerHTML = `
-          <h2>Eva 💖</h2>
+          <h2>Eva 💕</h2>
           <p>Entonces…</p>
           <p><strong>¿Quieres salir conmigo este San Valentín?</strong> 💌</p>
           <p><strong>Comida:</strong> ${state.food}</p>
@@ -159,7 +159,7 @@ function launchHearts() {
   for (let i = 0; i < 20; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
-    heart.innerText = "💖";
+    heart.innerText = "💕";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.animationDuration = 3 + Math.random() * 2 + "s";
     container.appendChild(heart);
