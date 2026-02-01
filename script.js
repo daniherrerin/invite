@@ -33,32 +33,60 @@ document.addEventListener("DOMContentLoaded", () => {
     show(step);
   };
 
+  // FOOD
+  const foodInput = document.getElementById("customFood");
+
   document.querySelectorAll(".food").forEach(card => {
     card.onclick = () => {
       document.querySelectorAll(".food").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
-      state.food = card.dataset.value;
+
+      if (card.classList.contains("custom")) {
+        foodInput.style.display = "block";
+        state.food = foodInput.value;
+      } else {
+        foodInput.style.display = "none";
+        state.food = card.dataset.value;
+      }
     };
   });
+
+  foodInput.oninput = () => {
+    state.food = foodInput.value;
+  };
+
+  // PLAN
+  const planInput = document.getElementById("customPlan");
 
   document.querySelectorAll(".plan").forEach(card => {
     card.onclick = () => {
       document.querySelectorAll(".plan").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
-      state.plan = card.dataset.value;
+
+      if (card.classList.contains("custom")) {
+        planInput.style.display = "block";
+        state.plan = planInput.value;
+      } else {
+        planInput.style.display = "none";
+        state.plan = card.dataset.value;
+      }
     };
   });
 
+  planInput.oninput = () => {
+    state.plan = planInput.value;
+  };
+
   document.querySelectorAll(".next").forEach(btn => {
     btn.onclick = () => {
-      if (step === 2 && !state.food) return alert("Elige algo de comer 💕");
-      if (step === 3 && !state.plan) return alert("Elige un plan 😘");
+      if (step === 2 && !state.food) return alert("Escribe o elige la comida 💕");
+      if (step === 3 && !state.plan) return alert("Escribe o elige el plan 😘");
 
       if (step === steps.length - 2) {
         document.getElementById("summary").innerHTML = `
           <h2>Eva 💖</h2>
           <p>Entonces…</p>
-          <p>¿Te gustaría ser mi cita este <strong>San Valentín</strong>? 💌</p>
+          <p>¿Quieres ser mi cita este <strong>San Valentín</strong>? 💌</p>
           <p><strong>Comida:</strong> ${state.food}</p>
           <p><strong>Plan:</strong> ${state.plan}</p>
           <p><strong>Ganas:</strong> ${state.excitement}/10</p>
