@@ -1,76 +1,78 @@
 document.addEventListener("DOMContentLoaded", () => {
   const steps = document.querySelectorAll(".step");
-  let current = 0;
+  let step = 0;
 
-  const data = {
-    food: "",
-    activity: "",
+  const state = {
+    food: null,
+    plan: null,
     excitement: 5
   };
 
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.style.display = i === index ? "block" : "none";
+  const show = i => {
+    steps.forEach((s, index) => {
+      s.style.display = index === i ? "block" : "none";
     });
-  }
+  };
 
-  function nextStep() {
-    if (current < steps.length - 1) {
-      current++;
-      showStep(current);
-    }
-  }
+  show(step);
 
-  showStep(current);
+  document.getElementById("yes").onclick = () => {
+    step++;
+    show(step);
+  };
 
-  // STEP 1
-  document.getElementById("yes-button").addEventListener("click", nextStep);
-  document.getElementById("no-button").addEventListener("click", () => {
-    alert("You know you want to 😏");
+  document.getElementById("no").onclick = () => {
+    document.querySelector(".wizard").innerHTML = `
+      <h2>Too bad 😌</h2>
+      <p>You’ll never know what you missed.</p>
+    `;
+  };
+
+  document.getElementById("continue").onclick = () => {
+    step++;
+    show(step);
+  };
+
+  document.querySelectorAll(".food").forEach(card => {
+    card.onclick = () => {
+      document.querySelectorAll(".food").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      state.food = card.dataset.value;
+    };
   });
 
-  // STEP 2
-  document.getElementById("click-me-button").addEventListener("click", nextStep);
-
-  // FOOD SELECTION
-  document.querySelectorAll(".food").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".food").forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      data.food = btn.dataset.value;
-    });
+  document.querySelectorAll(".plan").forEach(card => {
+    card.onclick = () => {
+      document.querySelectorAll(".plan").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      state.plan = card.dataset.value;
+    };
   });
 
-  // ACTIVITY SELECTION
-  document.querySelectorAll(".activity").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".activity").forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      data.activity = btn.dataset.value;
-    });
-  });
+  document.querySelectorAll(".next").forEach(btn => {
+    btn.onclick = () => {
+      if (step === 2 && !state.food) return alert("Choose food first 😉");
+      if (step === 3 && !state.plan) return alert("Choose a plan 😉");
 
-  // NEXT BUTTONS
-  document.querySelectorAll(".next-step").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (current === steps.length - 2) {
+      if (step === steps.length - 2) {
         document.getElementById("summary").innerHTML = `
           <h2>✨ Your Date ✨</h2>
-          <p><strong>Food:</strong> ${data.food || "Surprise 😏"}</p>
-          <p><strong>Activity:</strong> ${data.activity || "Something fun 💃"}</p>
-          <p><strong>Excitement:</strong> ${data.excitement}/10</p>
+          <p><strong>Food:</strong> ${state.food}</p>
+          <p><strong>Plan:</strong> ${state.plan}</p>
+          <p><strong>Excitement:</strong> ${state.excitement}/10</p>
         `;
       }
-      nextStep();
-    });
+
+      step++;
+      show(step);
+    };
   });
 
-  // SLIDER
-  const slider = document.getElementById("excitement-slider");
-  const level = document.getElementById("excitement-level");
+  const slider = document.getElementById("slider");
+  const level = document.getElementById("level");
 
-  slider.addEventListener("input", () => {
-    data.excitement = slider.value;
+  slider.oninput = () => {
+    state.excitement = slider.value;
     level.textContent = slider.value;
-  });
+  };
 });
