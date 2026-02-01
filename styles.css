@@ -79,3 +79,17 @@ button {
 .next {
   margin-top: 10px;
 }
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  display: none;
+}
+
+.card.custom {
+  background: #f0f0f0;
+  font-style: italic;
+}
+
