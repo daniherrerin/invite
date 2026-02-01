@@ -1,70 +1,67 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".step");
+  let currentStep = 0;
 
-.wizard-container {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  width: 320px;
-  text-align: center;
-}
+  const selections = {
+    food: "",
+    activity: "",
+    excitement: 5
+  };
 
-.step {
-  display: none;
-}
+  function showStep(step) {
+    steps.forEach((s, i) => {
+      s.style.display = i === step ? "block" : "none";
+    });
+  }
 
-.modern-btn {
-  padding: 10px 20px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  margin: 8px;
-}
+  function nextStep() {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
 
-#yes-button {
-  background: #ff5e78;
-  color: white;
-}
+  showStep(currentStep);
 
-#no-button {
-  background: #f0f0f0;
-}
+  document.getElementById("yes-button").addEventListener("click", nextStep);
 
-.long-effect-btn,
-.btn {
-  background: #ff5e78;
-  color: white;
-  padding: 12px;
-  border-radius: 25px;
-  border: none;
-  margin-top: 20px;
-  cursor: pointer;
-  width: 100%;
-}
+  document.getElementById("no-button").addEventListener("click", () => {
+    alert("Maybe next time 😢");
+  });
 
-.option {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 100%;
-  border-radius: 20px;
-  border: none;
-  background: #ffe1e6;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+  document.getElementById("click-me-button").addEventListener("click", nextStep);
 
-.option:hover {
-  transform: scale(1.05);
-}
+  document.querySelectorAll(".food").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selections.food = btn.dataset.value;
+    });
+  });
 
-#summary h2 {
-  margin-bottom: 15px;
-}
+  document.querySelectorAll(".activity").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selections.activity = btn.dataset.value;
+    });
+  });
+
+  document.querySelectorAll(".next-step").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep === steps.length - 2) {
+        document.getElementById("summary").innerHTML = `
+          <h2>✨ Your Date Plan ✨</h2>
+          <p><strong>Food:</strong> ${selections.food || "Surprise 😏"}</p>
+          <p><strong>Activity:</strong> ${selections.activity || "Something fun 💃"}</p>
+          <p><strong>Excitement:</strong> ${selections.excitement}/10</p>
+        `;
+      }
+      nextStep();
+    });
+  });
+
+  const slider = document.getElementById("excitement-slider");
+  const level = document.getElementById("excitement-level");
+
+  slider.addEventListener("input", () => {
+    selections.excitement = slider.value;
+    level.textContent = slider.value;
+  });
+});
