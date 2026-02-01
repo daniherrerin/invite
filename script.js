@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     excitement: 5
   };
 
-  function showStep(i) {
-    steps.forEach((step, index) => {
-      step.style.display = index === i ? "block" : "none";
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = i === index ? "block" : "none";
     });
   }
 
-  function next() {
+  function nextStep() {
     if (current < steps.length - 1) {
       current++;
       showStep(current);
@@ -23,28 +23,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showStep(current);
 
-  document.getElementById("yes-button").onclick = next;
-  document.getElementById("click-me-button").onclick = next;
+  // STEP 1
+  document.getElementById("yes-button").addEventListener("click", nextStep);
+  document.getElementById("no-button").addEventListener("click", () => {
+    alert("You know you want to 😏");
+  });
 
-  document.getElementById("no-button").onclick = () => {
-    alert("You’ll regret this 😌");
-  };
+  // STEP 2
+  document.getElementById("click-me-button").addEventListener("click", nextStep);
 
-  function handleSelection(type) {
-    document.querySelectorAll(`.${type}`).forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(`.${type}`).forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-        data[type] = btn.dataset.value;
-      };
+  // FOOD SELECTION
+  document.querySelectorAll(".food").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".food").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      data.food = btn.dataset.value;
     });
-  }
+  });
 
-  handleSelection("food");
-  handleSelection("activity");
+  // ACTIVITY SELECTION
+  document.querySelectorAll(".activity").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".activity").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      data.activity = btn.dataset.value;
+    });
+  });
 
+  // NEXT BUTTONS
   document.querySelectorAll(".next-step").forEach(btn => {
-    btn.onclick = () => {
+    btn.addEventListener("click", () => {
       if (current === steps.length - 2) {
         document.getElementById("summary").innerHTML = `
           <h2>✨ Your Date ✨</h2>
@@ -53,15 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Excitement:</strong> ${data.excitement}/10</p>
         `;
       }
-      next();
-    };
+      nextStep();
+    });
   });
 
+  // SLIDER
   const slider = document.getElementById("excitement-slider");
   const level = document.getElementById("excitement-level");
 
-  slider.oninput = () => {
+  slider.addEventListener("input", () => {
     data.excitement = slider.value;
     level.textContent = slider.value;
-  };
+  });
 });
