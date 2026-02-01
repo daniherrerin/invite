@@ -119,6 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Plan:</strong> ${state.plan}</p>
           <p><strong>Ganas:</strong> ${state.excitement}/10</p>
         `;
+        launchConfetti();
+launchHearts();
+
       }
 
       step++;
@@ -135,3 +138,32 @@ document.addEventListener("DOMContentLoaded", () => {
     level.textContent = slider.value;
   });
 });
+function launchConfetti() {
+  const container = document.getElementById("confetti");
+
+  for (let i = 0; i < 80; i++) {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.animationDuration = 2 + Math.random() * 3 + "s";
+    conf.style.background = ["#ff5e78", "#ffd1dc", "#ff8fa3"][Math.floor(Math.random() * 3)];
+    container.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 5000);
+  }
+}
+
+function launchHearts() {
+  const container = document.getElementById("confetti");
+
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+    container.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }
+}
