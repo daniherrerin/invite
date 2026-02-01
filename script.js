@@ -5,102 +5,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const state = {
     food: null,
     plan: null,
-    excitement: 7,
-    foodCustom: false,
-    planCustom: false
+    excitement: 7
   };
 
-  const show = i => {
-    steps.forEach((s, index) => {
-      s.style.display = index === i ? "block" : "none";
+  const showStep = index => {
+    steps.forEach((s, i) => {
+      s.style.display = i === index ? "block" : "none";
     });
   };
 
-  show(step);
+  showStep(step);
 
   // STEP 1
-  document.getElementById("yes").onclick = () => {
+  document.getElementById("yes").addEventListener("click", () => {
     step++;
-    show(step);
-  };
+    showStep(step);
+  });
 
-  document.getElementById("no").onclick = () => {
+  document.getElementById("no").addEventListener("click", () => {
     document.querySelector(".wizard").innerHTML = `
       <h2>😢</h2>
       <p>Bueno… al menos lo intenté.</p>
     `;
-  };
+  });
 
-  document.getElementById("continue").onclick = () => {
+  // STEP 2
+  document.getElementById("continue").addEventListener("click", () => {
     step++;
-    show(step);
-  };
+    showStep(step);
+  });
 
-  // FOOD
+  // FOOD SELECTION
   const foodInput = document.getElementById("customFood");
 
   document.querySelectorAll(".food").forEach(card => {
-    card.onclick = () => {
+    card.addEventListener("click", () => {
       document.querySelectorAll(".food").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
 
       if (card.classList.contains("custom")) {
-        state.foodCustom = true;
         foodInput.style.display = "block";
         foodInput.focus();
+        state.food = null; // se decidirá al pulsar Siguiente
       } else {
-        state.foodCustom = false;
         foodInput.style.display = "none";
         state.food = card.dataset.value;
       }
-    };
+    });
   });
 
-  // PLAN
+  // PLAN SELECTION
   const planInput = document.getElementById("customPlan");
 
   document.querySelectorAll(".plan").forEach(card => {
-    card.onclick = () => {
+    card.addEventListener("click", () => {
       document.querySelectorAll(".plan").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
 
       if (card.classList.contains("custom")) {
-        state.planCustom = true;
         planInput.style.display = "block";
         planInput.focus();
+        state.plan = null;
       } else {
-        state.planCustom = false;
         planInput.style.display = "none";
         state.plan = card.dataset.value;
       }
-    };
+    });
   });
 
-  // NEXT BUTTONS
+  // NEXT BUTTONS (AQUÍ ESTÁ LA CLAVE)
   document.querySelectorAll(".next").forEach(btn => {
-    btn.onclick = () => {
+    btn.addEventListener("click", () => {
 
       // FOOD VALIDATION
       if (step === 2) {
-        if (state.foodCustom) {
+        const selectedFood = document.querySelector(".food.selected");
+
+        if (!selectedFood) {
+          return alert("Elige una opción de comida 💕");
+        }
+
+        if (selectedFood.classList.contains("custom")) {
           if (!foodInput.value.trim()) {
-            return alert("Escribe qué te apetece comer 💕");
+            return alert("Escribe qué te apetece comer ✍️");
           }
           state.food = foodInput.value.trim();
-        } else if (!state.food) {
-          return alert("Elige algo de comer 💕");
         }
       }
 
       // PLAN VALIDATION
       if (step === 3) {
-        if (state.planCustom) {
+        const selectedPlan = document.querySelector(".plan.selected");
+
+        if (!selectedPlan) {
+          return alert("Elige un plan 😘");
+        }
+
+        if (selectedPlan.classList.contains("custom")) {
           if (!planInput.value.trim()) {
-            return alert("Escribe el plan 😘");
+            return alert("Escribe el plan ✍️");
           }
           state.plan = planInput.value.trim();
-        } else if (!state.plan) {
-          return alert("Elige un plan 😘");
         }
       }
 
@@ -109,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("summary").innerHTML = `
           <h2>Eva 💖</h2>
           <p>Entonces…</p>
-          <p>¿Quieres salir conmigo este <strong>San Valentín</strong>? 💌</p>
+          <p><strong>¿Quieres salir conmigo este San Valentín?</strong> 💌</p>
           <p><strong>Comida:</strong> ${state.food}</p>
           <p><strong>Plan:</strong> ${state.plan}</p>
           <p><strong>Ganas:</strong> ${state.excitement}/10</p>
@@ -117,3 +122,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       step++;
+      showStep(step);
+    });
+  });
+
+  // SLIDER
+  const slider = document.getElementById("slider");
+  const level = document.getElementById("level");
+
+  slider.addEventListener("input", () => {
+    state.excitement = slider.value;
+    level.textContent = slider.value;
+  });
+});
