@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Invite Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -12,7 +12,8 @@
 <main>
   <div class="wizard-container">
 
-    <div class="step" style="display:block;">
+    <!-- STEP 1 -->
+    <div class="step">
       <p><strong>Want to see how this works? ✨</strong></p>
       <div id="response-buttons">
         <button id="yes-button" class="modern-btn">Yes</button>
@@ -20,32 +21,39 @@
       </div>
     </div>
 
+    <!-- STEP 2 -->
     <div class="step">
       <h2>YAYY 🎉</h2>
       <button id="click-me-button" class="long-effect-btn">CLICK ME</button>
     </div>
 
+    <!-- STEP 3 -->
     <div class="step">
       <h2>WHAT WOULD YOU LIKE TO EAT?</h2>
-      <div id="selected-foods"></div>
-      <div id="food-images"></div>
+      <button class="option food" data-value="🍕 Pizza">🍕 Pizza</button>
+      <button class="option food" data-value="🍣 Sushi">🍣 Sushi</button>
+      <button class="option food" data-value="🍔 Burger">🍔 Burger</button>
       <button class="btn next-step">Next</button>
     </div>
 
+    <!-- STEP 4 -->
     <div class="step">
       <h2>WHAT WOULD YOU LIKE TO DO?</h2>
-      <div id="selected-activities"></div>
-      <div id="activity-images"></div>
+      <button class="option activity" data-value="🎬 Movie">🎬 Movie</button>
+      <button class="option activity" data-value="🍷 Drinks">🍷 Drinks</button>
+      <button class="option activity" data-value="🚶 Walk">🚶 Walk</button>
       <button class="btn next-step">Next</button>
     </div>
 
+    <!-- STEP 5 -->
     <div class="step">
       <h2>HOW EXCITED ARE YOU?</h2>
-      <input type="range" id="excitement-slider" min="1" max="10" value="5">
+      <input type="range" id="excitement-slider" min="1" max="10" value="5" />
       <p>Your excitement level is: <span id="excitement-level">5</span></p>
       <button class="btn next-step">Next</button>
     </div>
 
+    <!-- STEP 6 -->
     <div class="step">
       <div id="summary"></div>
     </div>
