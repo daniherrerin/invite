@@ -2,58 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Invite Demo</title>
+  <title>Invite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-
-<main>
+<main class="app">
   <div class="wizard-container">
 
-    <!-- STEP 1 -->
     <div class="step">
-      <p><strong>Want to see how this works? ✨</strong></p>
-      <div id="response-buttons">
-        <button id="yes-button" class="modern-btn">Yes</button>
-        <button id="no-button" class="modern-btn">No</button>
+      <h2>Want to see how this works? ✨</h2>
+      <div class="buttons">
+        <button id="yes-button" class="primary">Yes</button>
+        <button id="no-button" class="secondary">No</button>
       </div>
     </div>
 
-    <!-- STEP 2 -->
     <div class="step">
       <h2>YAYY 🎉</h2>
-      <button id="click-me-button" class="long-effect-btn">CLICK ME</button>
+      <button id="click-me-button" class="primary full">CLICK ME</button>
     </div>
 
-    <!-- STEP 3 -->
     <div class="step">
-      <h2>WHAT WOULD YOU LIKE TO EAT?</h2>
+      <h2>What would you like to eat?</h2>
       <button class="option food" data-value="🍕 Pizza">🍕 Pizza</button>
       <button class="option food" data-value="🍣 Sushi">🍣 Sushi</button>
       <button class="option food" data-value="🍔 Burger">🍔 Burger</button>
-      <button class="btn next-step">Next</button>
+      <button class="next-step primary full">Next</button>
     </div>
 
-    <!-- STEP 4 -->
     <div class="step">
-      <h2>WHAT WOULD YOU LIKE TO DO?</h2>
+      <h2>What would you like to do?</h2>
       <button class="option activity" data-value="🎬 Movie">🎬 Movie</button>
       <button class="option activity" data-value="🍷 Drinks">🍷 Drinks</button>
       <button class="option activity" data-value="🚶 Walk">🚶 Walk</button>
-      <button class="btn next-step">Next</button>
+      <button class="next-step primary full">Next</button>
     </div>
 
-    <!-- STEP 5 -->
     <div class="step">
-      <h2>HOW EXCITED ARE YOU?</h2>
-      <input type="range" id="excitement-slider" min="1" max="10" value="5" />
-      <p>Your excitement level is: <span id="excitement-level">5</span></p>
-      <button class="btn next-step">Next</button>
+      <h2>How excited are you?</h2>
+      <input type="range" id="excitement-slider" min="1" max="10" value="5">
+      <p><span id="excitement-level">5</span>/10 😍</p>
+      <button class="next-step primary full">Finish</button>
     </div>
 
-    <!-- STEP 6 -->
     <div class="step">
       <div id="summary"></div>
     </div>
