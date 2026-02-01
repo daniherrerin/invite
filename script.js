@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const state = {
     food: null,
     plan: null,
-    excitement: 5
+    excitement: 7
   };
 
   const show = i => {
@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("no").onclick = () => {
     document.querySelector(".wizard").innerHTML = `
-      <h2>Too bad 😌</h2>
-      <p>You’ll never know what you missed.</p>
+      <h2>😢</h2>
+      <p>Bueno… al menos lo intenté.</p>
     `;
   };
 
@@ -51,15 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".next").forEach(btn => {
     btn.onclick = () => {
-      if (step === 2 && !state.food) return alert("Choose food first 😉");
-      if (step === 3 && !state.plan) return alert("Choose a plan 😉");
+      if (step === 2 && !state.food) return alert("Elige algo de comer 💕");
+      if (step === 3 && !state.plan) return alert("Elige un plan 😘");
 
       if (step === steps.length - 2) {
         document.getElementById("summary").innerHTML = `
-          <h2>✨ Your Date ✨</h2>
-          <p><strong>Food:</strong> ${state.food}</p>
+          <h2>Eva 💖</h2>
+          <p>Entonces…</p>
+          <p>¿Te gustaría ser mi cita este <strong>San Valentín</strong>? 💌</p>
+          <p><strong>Comida:</strong> ${state.food}</p>
           <p><strong>Plan:</strong> ${state.plan}</p>
-          <p><strong>Excitement:</strong> ${state.excitement}/10</p>
+          <p><strong>Ganas:</strong> ${state.excitement}/10</p>
         `;
       }
 
