@@ -9,7 +9,7 @@ body {
 }
 
 .wizard-container {
-  background: #ffffff;
+  background: white;
   padding: 30px;
   border-radius: 20px;
   width: 320px;
@@ -18,10 +18,6 @@ body {
 
 .step {
   display: none;
-}
-
-#response-buttons {
-  margin-top: 20px;
 }
 
 .modern-btn {
@@ -50,4 +46,25 @@ body {
   border: none;
   margin-top: 20px;
   cursor: pointer;
+  width: 100%;
+}
+
+.option {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background: #ffe1e6;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.option:hover {
+  transform: scale(1.05);
+}
+
+#summary h2 {
+  margin-bottom: 15px;
 }
