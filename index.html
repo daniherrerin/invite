@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Invite</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-<main class="app">
-  <div class="wizard-container">
+<div class="app">
+  <div class="wizard">
 
+    <!-- STEP 1 -->
     <div class="step">
       <h2>Want to see how this works? ✨</h2>
-      <div class="buttons">
-        <button id="yes-button" class="primary">Yes</button>
-        <button id="no-button" class="secondary">No</button>
+      <div class="row">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
       </div>
     </div>
 
+    <!-- STEP 2 -->
     <div class="step">
       <h2>YAYY 🎉</h2>
-      <button id="click-me-button" class="primary full">CLICK ME</button>
+      <button id="continue">CLICK ME</button>
     </div>
 
+    <!-- STEP 3 -->
     <div class="step">
       <h2>What would you like to eat?</h2>
-      <button class="option food" data-value="🍕 Pizza">🍕 Pizza</button>
-      <button class="option food" data-value="🍣 Sushi">🍣 Sushi</button>
-      <button class="option food" data-value="🍔 Burger">🍔 Burger</button>
-      <button class="next-step primary full">Next</button>
+      <div class="options">
+        <div class="card food" data-value="Pizza 🍕">Pizza 🍕</div>
+        <div class="card food" data-value="Sushi 🍣">Sushi 🍣</div>
+        <div class="card food" data-value="Burger 🍔">Burger 🍔</div>
+      </div>
+      <button class="next">Next</button>
     </div>
 
+    <!-- STEP 4 -->
     <div class="step">
       <h2>What would you like to do?</h2>
-      <button class="option activity" data-value="🎬 Movie">🎬 Movie</button>
-      <button class="option activity" data-value="🍷 Drinks">🍷 Drinks</button>
-      <button class="option activity" data-value="🚶 Walk">🚶 Walk</button>
-      <button class="next-step primary full">Next</button>
+      <div class="options">
+        <div class="card plan" data-value="Movie 🎬">Movie 🎬</div>
+        <div class="card plan" data-value="Drinks 🍷">Drinks 🍷</div>
+        <div class="card plan" data-value="Walk 🚶">Walk 🚶</div>
+      </div>
+      <button class="next">Next</button>
     </div>
 
+    <!-- STEP 5 -->
     <div class="step">
       <h2>How excited are you?</h2>
-      <input type="range" id="excitement-slider" min="1" max="10" value="5">
-      <p><span id="excitement-level">5</span>/10 😍</p>
-      <button class="next-step primary full">Finish</button>
+      <input type="range" min="1" max="10" value="5" id="slider">
+      <p><span id="level">5</span>/10</p>
+      <button class="next">Finish</button>
     </div>
 
+    <!-- STEP 6 -->
     <div class="step">
       <div id="summary"></div>
     </div>
 
   </div>
-</main>
+</div>
 
 <script src="script.js"></script>
 </body>
