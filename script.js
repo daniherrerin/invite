@@ -1,54 +1,70 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const steps = document.querySelectorAll(".step");
-  let currentStep = 0;
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 
-  function showStep(step) {
-    steps.forEach((s, i) => {
-      s.style.display = i === step ? "block" : "none";
-    });
-  }
+.wizard-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+}
 
-  showStep(currentStep);
+.step {
+  display: none;
+}
 
-  // Botones respuesta Sí y No
-  const yesButton = document.getElementById("yes-button");
-  const noButton = document.getElementById("no-button");
+.modern-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin: 8px;
+}
 
-  yesButton.addEventListener("click", () => {
-    currentStep++;
-    showStep(currentStep);
-  });
+#yes-button {
+  background: #ff5e78;
+  color: white;
+}
 
-  noButton.addEventListener("click", () => {
-    alert("Okay, maybe next time!");
-  });
+#no-button {
+  background: #f0f0f0;
+}
 
-  // Botón CLICK ME
-  const clickMeButton = document.getElementById("click-me-button");
-  if (clickMeButton) {
-    clickMeButton.addEventListener("click", () => {
-      currentStep++;
-      showStep(currentStep);
-    });
-  }
+.long-effect-btn,
+.btn {
+  background: #ff5e78;
+  color: white;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 100%;
+}
 
-  // Slider emoción
-  const excitementSlider = document.getElementById("excitement-slider");
-  const excitementLevel = document.getElementById("excitement-level");
+.option {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background: #ffe1e6;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-  if (excitementSlider && excitementLevel) {
-    excitementSlider.addEventListener("input", () => {
-      excitementLevel.textContent = excitementSlider.value;
-    });
-  }
+.option:hover {
+  transform: scale(1.05);
+}
 
-  // Botones Next
-  const nextButtons = document.querySelectorAll(".next-step");
-  nextButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      currentStep++;
-      if(currentStep >= steps.length) currentStep = steps.length -1;
-      showStep(currentStep);
-    });
-  });
-});
+#summary h2 {
+  margin-bottom: 15px;
+}
